@@ -4,5 +4,5 @@ import colorList from './colorList'
 
 export default combineReducers({
     counter,
-    colorList,
+    // colorList,
 })

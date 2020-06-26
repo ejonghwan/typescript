@@ -6,7 +6,7 @@ class colorListContainer extends Component {
 
 
     handleChange = (e) => {
-        this.props.input: e.target.value
+        // this.props.input: e.target.value
     }
 
 
