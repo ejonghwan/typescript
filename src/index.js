@@ -121,4 +121,29 @@ const add2 = function (x, y) {
     return x + y;
 };
 add2(10, 20);
-const a;
+const aaa = age => {
+    return age > 10;
+};
+aaa(33);
+class Bmw {
+    constructor(c) {
+        this.wheels = 4;
+        this.color = c;
+    }
+    start() {
+        console.log('go...!');
+    }
+}
+const bbb = new Bmw('green');
+console.log(bbb);
+bbb.start();
+const benz = {
+    dor: 5,
+    stop() {
+        console.log('stop');
+    },
+    // 확장된 인터페이스도 모두 입력해줘야 오류안남.
+    color: 'block',
+    wheels: 4,
+    start() { }
+};

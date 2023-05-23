@@ -208,7 +208,7 @@ console.log(user.age)
 
 
 
-// interFace function 
+// ################## interFace function 
 interface Add {
     (num1: number, num2: number): number;
 }
@@ -219,12 +219,71 @@ const add2: Add = function(x, y) {
 add2(10, 20)
 
 
-
-
+// ex2)
 interface IsAdult {
-    (age: number): boolean;
+    (age:number): boolean;
 }
 
-const a: IsAdult
+const aaa:IsAdult = age => {
+    return age > 10;
+}
+
+aaa(33)
+
+
+
+
+// ################## implements
+interface Car {
+    color: string;
+    wheels: number;
+    start(): void;
+}
+
+
+class Bmw implements Car {
+    wheels = 4;
+    color;
+    constructor(c: string) {
+        this.color = c;
+    }
+
+    start() {
+        console.log('go...!')
+    }
+}
+
+const bbb = new Bmw('green');
+console.log(bbb)
+bbb.start();
+
+// ################## 인터페이스 확장 extend
+interface Benz extends Car {
+    dor: number;
+    stop(): void;
+}
+
+const benz: Benz = {
+    dor: 5,
+    stop() {
+        console.log('stop')
+    }, 
+
+    // 확장된 인터페이스도 모두 입력해줘야 오류안남.
+    color: 'block',
+    wheels: 4,
+    start() {}
+}
+
+
+
+// ################## 인터페이스 여러개 확장 가능
+interface Toy {
+    name: string;
+}
+
+interface ToyCar extends Car, Toy {
+    price: number;
+}
 
 
