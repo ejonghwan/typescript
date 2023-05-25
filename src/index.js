@@ -46,7 +46,9 @@ function arrf(arr) {
 }
 arrf([1, 2, 3]);
 // arrf(123)
-// ################################################## 기본 타입
+// ##################################################
+// ################################################## 기본타입
+// ################################################## 
 let car = 'benz';
 // let car = 'benz' //타입추론
 // car = 3 //error
@@ -146,4 +148,84 @@ const benz = {
     color: 'block',
     wheels: 4,
     start() { }
+};
+// ####################################################  
+// #################################################### 함수 
+// ####################################################  
+// 함수의 리턴값의 타입지정
+function add3(n1, n2) {
+    console.log(n1 + n2);
+}
+function isAdult22(age) {
+    return age > 19;
+}
+function hello(name) {
+    return `hellow, ${name || "world"}`;
+}
+function hello2(name = 'world') {
+    return `hellow, ${name}`;
+}
+// hello() //매개변수가 없으면 typescript는 에러
+// 하지만 옵셔널 매개변수는 없어도 가능
+// * 옵셔널 매개변수는 무조건 뒤에있어야함 (name: string, age?: number )
+hello();
+function add44(...nums) {
+    return nums.reduce((result, num) => result + num, 0);
+}
+add44(1, 2, 3);
+add44(4, 5, 6);
+const Sam = { name: 'Sam' };
+function showName(age, gender) {
+    console.log(this.name, age, gender);
+}
+const ho = showName.bind(Sam);
+ho(13, 'm');
+function join(name, age) {
+    if (typeof age === "number") {
+        return { name, age };
+    }
+    else {
+        return "나이는 숫자로 입력해주세요.";
+    }
+}
+// const sam: User2 = join("Sam", 30); 
+//error sam이 유저객체를 반환하는데 확신이 없다. string을 반환할수도 있다고 판단
+// const jane: string = join("Jane", 30); //error
+// 오버로드 사용 시 에러 안남
+const sam = join("Sam", 30);
+const jane = join("Jane", "30");
+// #################################################### 
+// #################################################### Literal Types
+// #################################################### 
+const userName1 = "Bob"; //type: "Bob"  얘는 변화할 수 없으니 그냥 값자체. "문자열 리터럴 타입" 
+let userName2 = "Tom"; //type: string  얘는 변화할 수 있으니 string 
+let userName3 = "Tom"; //2개 쓸땐 이렇게  
+const user44 = {
+    name: "Bob",
+    // job: "student", //학생은 Job에 없어서 에러.
+    job: "developer"
+};
+// 동일한 이름의 속성을 정의하고, type을 다르게 줌으로써 name: "car" name: "mobile" 2개의 인터페이스를 구분
+// 이런것을 식별가능한 유니온 타입이라고함
+function getGift(gift) {
+    console.log(gift.color); //color 는 둘다 가지고 있어서 에러안남
+    // gift.start(); //start()는 한개만 가지고 있어서 에러남
+    if (gift.name === "car") {
+        gift.start();
+    }
+    else {
+        gift.call();
+    }
+}
+const ccc = {
+    name: "car",
+    color: "red",
+    start: function () { }
+};
+getGift(ccc);
+const toyCar11 = {
+    name: "타요",
+    color: "red",
+    price: 100,
+    start() { },
 };
