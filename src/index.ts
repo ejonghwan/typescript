@@ -504,3 +504,101 @@ const toyCar11: Toy11 & Car11 = {
 }
 
 
+
+
+
+
+
+
+// #################################################### 
+// #################################################### class
+// #################################################### 
+
+
+/*
+ 접근제한자(Access modifier) - public, private, protected
+ - public: 자식 클래스나 클래스 인스턴스에서 접근가능. 
+ - private: 자식 클래스에서도 사용못함
+ - protected: 자식 클래스에선 사용가능하나 인스턴스에선 사용못함
+ - readonly: 인스턴스에서 변경불가능
+*/
+
+class Car12 {
+    // color: string; //방법1 ) typescript에선 맴버변수를 위에 미리 선언해줘야함
+    // 방법2) constructor(public color: string) {
+    // 방법3) constructor(readonly color: string) {
+    readonly name: string = "car";
+    color: string;
+
+    // 맴버변수는 기본적으로 public
+    // public name: string
+    // private name: string  //이렇게하면 아래 Bmw에서 오류남. Car 안에서만 사용가능  (or #name: string)
+    // protected name: string // 자식까진 허용하나, 인스턴스에서 호출하면 에러남
+    // readonly name: string // 인스턴스에서 변경불가
+
+    // static은 this가 아닌 class로 접근. Car12.wheels
+    static wheels = 4;
+
+    // 만약 name을 바꾸게 하고 싶으면 매개변수로,
+    constructor(color: string, name: string) {
+        this.color = color;
+        this.name = name;
+    }
+
+    start() {
+        console.log('start')
+        console.log(Car12.wheels)
+    }
+}
+
+class Bmw12 extends Car12 {
+    constructor(color: string, name: string) {
+        super(color, name)
+    }
+    showName() {
+        console.log(super.name)
+    }
+}
+
+
+const z4 = new Bmw12("black", "name change")
+console.log(z4.name)
+// z4.name = 'hoho' //readonly 붙이면 변경불가능
+
+
+
+
+
+
+/* 
+    추상 클래스
+    - Car부모에선 사용못함. 확장된 클래스에서만 사용가능
+    - abstract 부모쪽에선 이름만 선언해줘야함. 안그럼 에러남. 
+      상속이란 부모에선 선언만해주고 자식에서 기능을 선언하는걸 말함. 
+      부모에서 만든것이 자식이 모두 가지고 있지만 가지각색의 기능을 할 때 사용
+*/
+
+abstract class Car13 {
+    color: string;
+    constructor(color: string) {
+        this.color = color;
+    }
+
+    start(): void {
+        console.log('start')
+    }
+
+    abstract doSomething(): void; //선언
+}
+
+class Bmw13 extends Car13 {
+    constructor(color: string) {
+        super(color)
+    }
+
+    doSomething() { //자식쪽에서 기능선언
+        alert(3)
+    }
+}
+
+const z13 = new Bmw13("black")
